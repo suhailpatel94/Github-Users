@@ -30,11 +30,16 @@ class UserAdapter : ListAdapter<UserListItemViewData, UserAdapter.RecyclerViewHo
 }) {
 
 
+    lateinit var click: (id: String) -> Unit
+
+    fun initCallBack(click: (id: String) -> Unit) {
+        this.click = click
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
 
 
-
-        val binding:UserListItemBinding = DataBindingUtil.inflate(
+        val binding: UserListItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.user_list_item,
             parent,
@@ -61,6 +66,10 @@ class UserAdapter : ListAdapter<UserListItemViewData, UserAdapter.RecyclerViewHo
         fun bind(dataModel: UserListItemViewData) {
             binding.model = dataModel
             binding.executePendingBindings()
+
+            binding.avatar.setOnClickListener {
+                click(dataModel.id)
+            }
         }
     }
 

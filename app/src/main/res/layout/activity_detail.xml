@@ -36,6 +36,7 @@
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
+            android:onClick="@{ (v)->viewmodel.delete() }"
             android:text="Delete"
             android:textColor="#fff"
             app:cornerRadius="0dp"

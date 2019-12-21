@@ -18,6 +18,9 @@ interface UserDao {
     @Delete
     fun delete(todo: User)
 
+    @Query("DELETE FROM user WHERE id=:id")
+    fun delete(id: String)
+
     @Update
     fun updateTodo(vararg todos: User)
 }

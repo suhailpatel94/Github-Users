@@ -19,6 +19,9 @@ class UserRepository(private val application: Application) {
         userRemoteDataSource = UserRemoteDataSource(apiService)
     }
 
+    suspend fun delete(id: String) {
+        AppDatabase.getDatabase(application).userDao().delete(id)
+    }
 
     fun fetchAllUsers() = liveData(Dispatchers.IO) {
 

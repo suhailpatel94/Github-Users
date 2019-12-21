@@ -18,8 +18,14 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
 
     fun fetchAllUsers(): LiveData<Result<List<User>>> {
+        mainActivityViewData.loading.value = true
         return userRepository.fetchAllUsers()
     }
+
+    fun fetch() {
+        mainActivityViewData.loading.value = true
+    }
+
 
     private val userList: MutableLiveData<List<User>> = MutableLiveData()
 
@@ -27,7 +33,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val userListViewData: LiveData<List<UserListItemViewData>> =
         Transformations.switchMap(userList) {
             val liveData: MutableLiveData<List<UserListItemViewData>> =
-                MutableLiveData(userListToViewData(it));
+                MutableLiveData(userListToViewData(it))
             liveData
         }
 

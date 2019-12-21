@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
+        binding.viewmodel = mainActivityViewModel
+        binding.data = mainActivityViewModel.mainActivityViewData
 
 
         initUserList()

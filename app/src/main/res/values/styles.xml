@@ -8,8 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.Launcher">
+    <style name="splash" parent="AppTheme">
         <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

@@ -14,7 +14,7 @@ data class User(
     @NonNull
     @PrimaryKey
     @Json(name = "id")
-    val id: Int = 0,
+    val id: String = "",
 
     @Json(name = "avatar_url")
     val avatarUrl: String = "",

@@ -8,6 +8,11 @@
         <variable
             name="viewmodel"
             type="com.sundaymobility.githubusers.viewmodels.DetailActivityViewModel" />
+
+        <variable
+            name="data"
+            type="com.sundaymobility.githubusers.ui.view_data_model.DetailActivityViewData" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,11 +20,12 @@
         android:layout_height="match_parent"
         tools:context=".ImageActivity">
 
-        <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
+            app:detail_avatar="@{ data.avatar_url }"
             app:layout_constraintBottom_toTopOf="@id/recapture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:background="#2979ff"
+            android:backgroundTint="#0f0f0f"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"

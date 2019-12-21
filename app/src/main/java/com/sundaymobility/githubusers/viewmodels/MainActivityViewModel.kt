@@ -1,18 +1,22 @@
 package com.sundaymobility.githubusers.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.kotlinprac.utils.data_models.Result
 import com.sundaymobility.githubusers.db.db_models.User
 import com.sundaymobility.githubusers.repository.UserRepository
 import com.sundaymobility.githubusers.ui.view_data_model.MainActivityViewData
 import com.sundaymobility.githubusers.ui.view_data_model.UserListItemViewData
+import com.sundaymobility.githubusers.utils.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
-    public val mainActivityViewData = MainActivityViewData()
+    val mainActivityViewData = MainActivityViewData()
+    var swipeEvent: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    var addUserEvent: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
     private val userRepository = UserRepository(application)
 
@@ -22,10 +26,22 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         return userRepository.fetchAllUsers()
     }
 
-    fun fetch() {
+    fun loadData() {
         mainActivityViewData.loading.value = true
+        swipeEvent.value = Event(true)
     }
 
+    fun addUser() {
+        addUserEvent.value = Event(true)
+    }
+
+    fun saveUser(user: User) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            userRepository.insert(user)
+        }
+    }
 
     private val userList: MutableLiveData<List<User>> = MutableLiveData()
 

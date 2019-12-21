@@ -1,13 +1,16 @@
 package com.sundaymobility.githubusers.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.example.kotlinprac.api.ApiClient
 import com.example.kotlinprac.utils.data_models.Result
 import com.sundaymobility.githubusers.api.ApiService
 import com.sundaymobility.githubusers.db.AppDatabase
+import com.sundaymobility.githubusers.db.db_models.User
 import kotlinx.coroutines.Dispatchers
+import java.lang.Exception
 
 class UserRepository(private val application: Application) {
 
@@ -21,6 +24,19 @@ class UserRepository(private val application: Application) {
 
     suspend fun delete(id: String) {
         AppDatabase.getDatabase(application).userDao().delete(id)
+    }
+
+    suspend fun fetch(id: String): LiveData<User> {
+        return AppDatabase.getDatabase(application).userDao().get(id)
+    }
+
+    suspend fun insert(user: User) {
+        try {
+            AppDatabase.getDatabase(application).userDao().insert(user)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     fun fetchAllUsers() = liveData(Dispatchers.IO) {

@@ -25,6 +25,8 @@ class DetailActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
         binding.viewmodel = detailActivityViewModel
+        binding.data = detailActivityViewModel.detailActivityViewData
+
 
         if (intent != null && intent.extras != null) {
 
@@ -41,6 +43,13 @@ class DetailActivity : AppCompatActivity() {
 
     fun initObservers() {
 
+
+        detailActivityViewModel.fetchData().observe(this, Observer {
+            if (it != null)
+                detailActivityViewModel.onDataFetched(it)
+
+
+        })
         detailActivityViewModel.deleteEvent.observe(this, Observer {
 
             val value = it.getContentIfNotHandled()

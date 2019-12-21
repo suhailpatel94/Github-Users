@@ -67,7 +67,7 @@ class UserAdapter : ListAdapter<UserListItemViewData, UserAdapter.RecyclerViewHo
             binding.model = dataModel
             binding.executePendingBindings()
 
-            binding.avatar.setOnClickListener {
+            binding.root.setOnClickListener {
                 click(dataModel.id)
             }
         }
